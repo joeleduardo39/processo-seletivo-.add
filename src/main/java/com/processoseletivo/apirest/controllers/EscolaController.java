@@ -21,48 +21,43 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value = "/api")
-@Api(value="API REST Produtos")
-@CrossOrigin(origins="*")
+@Api(value = "API REST Produtos")
+@CrossOrigin(origins = "*")
 public class EscolaController {
-	
 
 	@Autowired
 	EscolaRepository escolaRepository;
-	
+
 	@GetMapping("/escolas")
-	@ApiOperation(value="Retorna uma lista de escolas")
-	public List<Escola> listaEscolas(){
-	return escolaRepository.findAll();
+	@ApiOperation(value = "Retorna uma lista de escolas")
+	public List<Escola> listaEscolas() {
+		return escolaRepository.findAll();
 
 	}
-	
+
 	@GetMapping("/escola/{id}")
-	@ApiOperation(value="Retorna uma escola unica")
-	public Escola listaEscolaUnica(@PathVariable(value="id") long id){
-	return escolaRepository.findById(id);
+	@ApiOperation(value = "Retorna uma escola unica")
+	public Escola listaEscolaUnica(@PathVariable(value = "id") long id) {
+		return escolaRepository.findById(id);
 
 	}
-	
+
 	@PostMapping("/escola")
-	@ApiOperation(value="Salva uma escola")
+	@ApiOperation(value = "Salva uma escola")
 	public Escola salvaEscola(@RequestBody Escola escola) {
 		return escolaRepository.save(escola);
 	}
-	
-	
 
 	@DeleteMapping("/escola")
-	@ApiOperation(value="Deleta uma escola")
+	@ApiOperation(value = "Deleta uma escola")
 	public void deletaEscola(@RequestBody Escola escola) {
 		escolaRepository.delete(escola);
 	}
-	
-	
+
 	@PutMapping("/escola")
-	@ApiOperation(value="Atualiza uma escola")
+	@ApiOperation(value = "Atualiza uma escola")
 	public Escola atualizaEscola(@RequestBody Escola escola) {
 		return escolaRepository.save(escola);
 	}
-	
-	
+
 }

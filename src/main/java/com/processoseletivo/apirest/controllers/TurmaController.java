@@ -21,49 +21,43 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value = "/api")
-@Api(value="API REST Produtos")
-@CrossOrigin(origins="*")
+@Api(value = "API REST Produtos")
+@CrossOrigin(origins = "*")
 public class TurmaController {
-	
 
 	@Autowired
 	TurmaRepository turmaRepository;
-	
+
 	@GetMapping("/turmas")
-	@ApiOperation(value="Retorna uma lista de turmas")
-	public List<Turma> listaTurmas(){
-	return turmaRepository.findAll();
+	@ApiOperation(value = "Retorna uma lista de turmas")
+	public List<Turma> listaTurmas() {
+		return turmaRepository.findAll();
 
 	}
-	
 
 	@GetMapping("/turma/{id}")
-	@ApiOperation(value="Retorna uma turma unica")
-	public Turma listaTurmaUnica(@PathVariable(value="id") long id){
-	return turmaRepository.findById(id);
+	@ApiOperation(value = "Retorna uma turma unica")
+	public Turma listaTurmaUnica(@PathVariable(value = "id") long id) {
+		return turmaRepository.findById(id);
 
 	}
 
-
 	@PostMapping("/turma")
-	@ApiOperation(value="Salva uma turma")
+	@ApiOperation(value = "Salva uma turma")
 	public Turma salvaTurma(@RequestBody Turma turma) {
 		return turmaRepository.save(turma);
 	}
-	
 
 	@DeleteMapping("/turma")
-	@ApiOperation(value="Deleta uma turma")
+	@ApiOperation(value = "Deleta uma turma")
 	public void deletaTurma(@RequestBody Turma turma) {
 		turmaRepository.delete(turma);
 	}
-	
+
 	@PutMapping("/turma")
-	@ApiOperation(value="Atualiza uma turma")
+	@ApiOperation(value = "Atualiza uma turma")
 	public Turma atualizaTurma(@RequestBody Turma turma) {
 		return turmaRepository.save(turma);
 	}
-	
-	
-	
+
 }
