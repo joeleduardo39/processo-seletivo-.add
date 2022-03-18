@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8" />
+<title>Sistema de Gestão de Alunos</title>
+
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+
+
+</head>
+<body>
+	<header th:insert="fragments/geral.html :: header"> </header>
+
+	<div class="container my-2">
+		<a th:href="@{/cadastro/alunos/nova}" class="btn btn-primary btn-sm mb-3">Incluir Aluno</a>
+		<h1>Alunos</h1>
+		<table border="1" class="table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>Data de nascimento</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="aluno : ${alunos.content}">
+					<td th:text="${aluno.id}"></td>
+					<td th:text="${aluno.nome}"></td>
+					<td th:text="${aluno.dataDeNascimento}"></td>
+					<td>
+						<a th:href="@{/cadastro/alunos/{id}(id=${aluno.id})}" class="btn btn-primary">Alterar</a>
+						<a th:href="@{/cadastro/alunos/excluir/{id}(id=${aluno.id})}" class="btn btn-danger">Excluir</a>			
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<nav aria-label="...">
+		    <ul class="pagination">
+			    <li th:if="${listaAlunos.totalPages > 0}" th:each="numeroPagina : ${numerosPaginas}" 
+			    	th:class="${numeroPagina==listaAlunos.number + 1} ? 'page-item active' : 'page-item'">
+			    	<a class="page-link" th:href="@{/cadastro/alunos(size=${listaAlunos.size}, page=${numeroPagina})}"
+			        th:text=${numeroPagina}></a>
+			    </li>
+		    </ul>
+		</nav>
+	</div>
+</body>
+</html>
